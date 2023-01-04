@@ -1,0 +1,79 @@
+version: '2.4'
+#services 
+services:
+  hamaster:
+    container_name: hamaster
+    build:
+      context: ./HAFolder/HAMaster
+      dockerfile: HAProxy.Dockerfile
+    restart: always
+    networks:
+      habackendnetwork:
+        ipv4_address: "192.168.13.214"
+    ports:
+      - 8081:80
+    stdin_open: true
+    tty: true
+    cap_add:
+      - NET_ADMIN
+  habackup:
+    container_name: habackup
+    build:
+      context: ./HAFolder/HASub
+      dockerfile: HAProxy.Dockerfile
+    restart: always
+    networks:
+      habackendnetwork:
+        ipv4_address: "192.168.13.222"
+
+    ports:
+      - 8080:80
+    stdin_open: true
+    tty: true
+    cap_add:
+      - NET_ADMIN
+  nginx1:
+    container_name: nginx1
+    build:
+      context: ./HAFolder/Nginx1
+      dockerfile: Nginx.Dockerfile
+    networks:
+      habackendnetwork:
+        ipv4_address: "192.168.13.212"
+  nginx2:
+    container_name: nginx2
+    build:
+      context: ./HAFolder/Nginx2
+      dockerfile: Nginx.Dockerfile
+    networks:
+      habackendnetwork:
+        ipv4_address: "192.168.13.216"
+  client:
+    container_name: client
+    build:
+      context: ./HAFolder/Client
+      dockerfile: client.Dockerfile
+    networks:
+      habackendnetwork:
+        ipv4_address: "192.168.13.210"
+    stdin_open: true
+    tty: true
+    cap_add:
+      - NET_ADMIN
+#volume
+volumes:
+  HAVolume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './HAFolder'
+#network
+networks:
+  habackendnetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.13.0/24"
+          gateway: "192.168.13.1"
