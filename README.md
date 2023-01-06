@@ -128,7 +128,7 @@ CMD [ "/usr/sbin/nginx", "-g", "daemon off;"]
 # Docker-compose.yml
 All of these thing above is the prerequited thing to the `docker-compose.yml`  
 (please check ip, exposed port, container_name, or some needed thing)
-```Dockerfile
+```docker-compose
 version: '2.4'
 #services 
 services:
