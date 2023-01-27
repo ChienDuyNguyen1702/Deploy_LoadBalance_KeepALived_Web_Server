@@ -1,0 +1,31 @@
+Mỗi người chọn 1 trong 2 đề tài để tìm hiểu. Yêu cầu làm slide trình bày, a Tân và bọn anh sẽ ngồi cùng review lại từng bạn một. Do quá trình nghỉ tết, Ra tết có thể du di nạp báo cảo lần này muộn 1 tuần. 
+
+Tìm hiểu về cloud (2 tuần)
+- Cloud là gì, cloud có lợi ích gì, so sánh private cloud và public cloud 
+VCS có triển khai cloud private với công nghệ openstack... 
+- Dựng cloud với devstack trên 1 máy ảo (thừa thời gian dựng trên 3 máy theo hocchudong càng tốt)
+- Với các project keystone, nova, neutron, cinder, glance: 
+   - Khái niệm: tác dụng project đó. Các lệnh thường dùng thể hiện điều này
+   - Các thành phần con của project : mỗi thành phần có tác dụng gì
+   - Luồng hoạt động giữa các thành phần con
+- Luồng hoạt động khi tạo instance, giữa các project.
+
+Tìm hiểu về ceph (3 tuần)
+- Ceph storage là hệ thống gì, cung cấp dịch vụ gì
+- Cài đặt ceph trên 3 máy ảo , mỗi máy ảo cắm 2 ổ cứng.
+- sử dụng cụm ceph vừa tạo để cấp ổ đĩa cho kvm 
+- 1 Ceph cluster bao gồm những thành phần nào (mon/mrg/osd/mds/rgw), tác dụng từng thành phần.
+- Tìm hiểu về ceph client: Ceph cung cấp các dịch vụ lưu trữ gì (rbd, rados, file server,…), đối với mỗi loại lưu trữ thì client là gì. Cơ chế xác thực ceph client và ceph cluster.
+- Tìm hiểu cách tổ chức dữ liệu trong ceph: (pool, placement group, object, osd).
+- Tìm hiểu kỹ hơn về cơ chế replicate so sánh với erasurecode
+- Cơ chế hoạt động của Ceph:
+   - Luồng hoạt động của ceph client kết nối với ceph cluster.
+   - Thuật toán CRUSH
+   - Dữ liệu được read/write từ Ceph client vào Ceph cluster như thế nào?
+   - Dữ liệu được đảm bảo dự phòng, chống mất mát như thế nào.
+   - Khi 1 OSD được thêm vào, gỡ ra khỏi cụm Ceph thì như nào?
+   - Mô hình triển khai ceph thông thường như nào, ví dụ:
+        o Bao nhiêu Mon, Mgr, OSD
+        o Các loại network (public network, cluster network)
+        o Công cụ triển khai (Ceph ansible, ceph admin, …)
+   - So sánh cơ chế bluestore và filestore.
